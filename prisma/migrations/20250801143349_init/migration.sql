@@ -35,6 +35,7 @@ CREATE TABLE "public"."Post" (
 -- CreateTable
 CREATE TABLE "public"."Comment" (
     "id" UUID NOT NULL,
+    "text" TEXT NOT NULL,
     "likes" INTEGER,
     "dislikes" INTEGER,
     "postId" UUID NOT NULL,
