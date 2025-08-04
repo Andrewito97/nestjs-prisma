@@ -1,5 +1,6 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   Get,
@@ -42,22 +43,37 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() data: CreateUserDto): Promise<void> {
-    await this.userService.createUser(data);
+  async createUser(@Body() data: CreateUserDto): Promise<User> {
+    const existingUser = await this.userService.getUserByEmail(data.email);
+
+    if (existingUser) {
+      throw new ConflictException('User with this email already exists');
+    }
+
+    return this.userService.createUser(data);
   }
 
   @Patch(':id')
   async updateUser(
     @Param() { id }: IdParamDto,
     @Body() data: UpdateUserDto,
-  ): Promise<void> {
+  ): Promise<User> {
     const user = await this.userService.getUserById(id);
 
     if (!user) {
       throw new NotFoundException('User is not found');
     }
 
+    if (data.email) {
+      const existingUser = await this.userService.getUserByEmail(data.email);
+
+      if (existingUser && existingUser.id !== id) {
+        throw new ConflictException('User with this email already exists');
+      }
+    }
+
     await this.userService.updateUser(id, data);
+    return this.userService.getUserById(id);
   }
 
   @Delete(':id')
