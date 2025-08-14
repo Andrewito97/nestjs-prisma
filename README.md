@@ -48,7 +48,13 @@ $ npm run prisma:generate-client
 After any model changes run:
 
 ```bash
-$ npm run migration:generate migrationName
+$ npm run prisma:generate-migration migrationName
+```
+
+To run existing migrations:
+
+```bash
+$ npm run prisma:run-migrations
 ```
 
 ## Running the app
