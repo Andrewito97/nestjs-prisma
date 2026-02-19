@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { PostService } from './services/post.service';
 import { IdParamDto } from '../common/dto/id-param.dto';
-import { Comment, Post as PostEntity } from 'generated/prisma';
+import { Comment, Post as PostEntity } from '@prisma/client';
 import { GetPostsDto } from './dto/get-posts.dto';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';

@@ -14,7 +14,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { IdParamDto } from '../common/dto/id-param.dto';
-import { User } from 'generated/prisma';
+import { User } from '@prisma/client';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
